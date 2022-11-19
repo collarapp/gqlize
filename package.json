@@ -1,79 +1,89 @@
 {
-  "author": {
-    "name": "Collar",
-    "email": "developer@collarapp.uk"
+  "name": "gqlize",
+  "version": "1.0.0",
+  "description": "Rapildy build and extend GraphQL API based on Sequelize models. This library helps you focus on business logic while taking care of GraphQL schema automatically.",
+  "main": "src/index.js",
+  "scripts": {
+    "publish-beta": "npm run lint && npm publish --tag beta",
+    "publish-prod": "npm publish",
+    "check": "npm run lint && npm run test",
+    "format": "prettier-eslint --write \"src/*.js\"",
+    "jest": "jest",
+    "jest-coverage": "npm run jest -- --coverage",
+    "lint": "eslint src --cache",
+    "test": "npm run test-db-reset && npm run jest",
+    "test-db-reset": "rm -rf tests/database.db && node tests/reset-db.js"
   },
-  "bugs": {
-    "url": "https://github.com/collarapp/gqlize/issues"
+  "files": [
+    "/src",
+    "package.json",
+    "README"
+  ],
+  "publishConfig": {
+    "cache": "cache/.npm",
+    "registry": "https://registry.npmjs.org/"
   },
-  "bundleDependencies": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/collarapp/gqlize"
+  },
+  "keywords": [
+    "graphql",
+    "sequelize"
+  ],
+  "author": "Collar App",
   "contributors": [
     {
       "name": "Collar",
       "email": "developer@collarapp.uk"
     }
   ],
-  "dependencies": {
-    "camelcase": "^5.0.0",
-    "cls-hooked": "^4.2.2",
-    "dataloader-sequelize": "^1.7.8",
-    "graphql-relay": "^0.5.0",
-    "graphql-request": "^1.8.2",
-    "graphql-sequelize": "9.2.0",
-    "uuid": "^3.3.2"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/collarapp/gqlize/issues"
   },
-  "deprecated": false,
-  "description": "A helper library that lets you focus on business logic by automatically generating GraphQLSchema and manages graphQL from Sequelize model.",
+  "homepage": "https://github.com/collarapp/gqlize#readme",
+  "dependencies": {
+    "camelcase": "^5.3.1",
+    "cls-hooked": "^4.2.2",
+    "dataloader-sequelize": "^2.3.3",
+    "graphql-relay": "^0.6.0",
+    "graphql-request": "^3.4.0",
+    "graphql-sequelize": "^9.4.3",
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-async-to-promises": "^0.8.2",
-    "babel-preset-es2015": "^6.24.1",
-    "eslint": "^5.13.0",
+    "eslint": "^8.9.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.0.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "prettier-eslint-cli": "^5.0.1",
+    "jest": "^27.5.1",
+    "jest-cli": "^27.5.1",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
-    "graphql": "^14.1.1",
-    "jest-cli": "^23.6.0",
-    "prettier-eslint-cli": "^4.7.1",
-    "sequelize": "^4.41.2",
-    "sequelize-cli": "^5.4.0",
-    "sqlite3": "^4.0.4",
-    "stringifier": "^2.0.0"
+    "graphql": "^14.5.4",
+    "husky": "^1.1.4",
+    "sequelize": "^6.2.2",
+    "sequelize-cli": "^6.1.0",
+    "sqlite3": "^5.0.2",
+    "stringifier": "^2.0.0",
+    "supertest": "^6.0.1"
   },
-  "homepage": "https://github.com/collarapp/gqlize#readme",
+  "peerDependencies": {
+    "graphql": "^15.1.0",
+    "sequelize": "^6.2.2"
+  },
   "jest": {
     "testEnvironment": "node",
     "verbose": true
   },
-  "keywords": [
-    "graphql",
-    "sequelize"
-  ],
-  "license": "MIT",
-  "main": "index.js",
-  "name": "gqlize",
-  "peerDependencies": {
-    "sequelize": "^4.41.2",
-    "graphql": "^14.1.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/collarapp/gqlize.git"
-  },
-  "scripts": {
-    "build": "babel --plugins babel-plugin-transform-async-to-promises src --presets babel-preset-es2015 --out-dir dist",
-    "check": "npm run lint && npm run test",
-    "clean": "rm -f dist/*",
-    "format": "prettier-eslint --write \"src/*.js\"",
-    "jest": "jest",
-    "jest-coverage": "npm run jest -- --coverage",
-    "lint": "eslint src --cache",
-    "test": "npm run test-db-reset && npm run jest",
-    "test-db-reset": "rm -rf tests/database.db && sequelize db:migrate"
-  },
-  "version": "0.1.71"
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint . --fix"
+    }
+  }
 }
